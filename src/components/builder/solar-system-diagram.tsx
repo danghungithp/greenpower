@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Home, SolarPanel, Battery, TowerControl } from 'lucide-react';
+import { Home, PanelTop, Battery, TowerControl } from 'lucide-react';
 
 // A generic icon wrapper for the diagram
 const IconWrapper = ({ icon: Icon, label, x, y }: { icon: React.ElementType, label: string, x: number, y: number }) => (
@@ -42,7 +42,7 @@ const Arrow = ({ d, bidirectional = false, dashed = false }: { d: string, bidire
 // Grid-Tie Diagram
 const GridTieDiagram = () => (
     <svg viewBox="0 0 600 300" className="w-full h-auto max-w-2xl mx-auto">
-        <IconWrapper icon={SolarPanel} label="Tấm pin" x={80} y={150} />
+        <IconWrapper icon={PanelTop} label="Tấm pin" x={80} y={150} />
         <BoxWrapper label="Inverter Hòa Lưới" x={280} y={150} />
         <IconWrapper icon={Home} label="Tải tiêu thụ" x={480} y={80} />
         <IconWrapper icon={TowerControl} label="Lưới điện" x={480} y={220} />
@@ -56,7 +56,7 @@ const GridTieDiagram = () => (
 // Hybrid Diagram
 const HybridDiagram = () => (
      <svg viewBox="0 0 600 350" className="w-full h-auto max-w-2xl mx-auto">
-        <IconWrapper icon={SolarPanel} label="Tấm pin" x={80} y={150} />
+        <IconWrapper icon={PanelTop} label="Tấm pin" x={80} y={150} />
         <BoxWrapper label="Inverter Hybrid" x={280} y={150} />
         <IconWrapper icon={Battery} label="Pin lưu trữ" x={280} y={280} />
         <IconWrapper icon={Home} label="Tải tiêu thụ" x={480} y={80} />
@@ -72,7 +72,7 @@ const HybridDiagram = () => (
 // Off-Grid Diagram
 const OffGridDiagram = () => (
      <svg viewBox="0 0 800 350" className="w-full h-auto max-w-3xl mx-auto">
-        <IconWrapper icon={SolarPanel} label="Tấm pin" x={80} y={150} />
+        <IconWrapper icon={PanelTop} label="Tấm pin" x={80} y={150} />
         <BoxWrapper label="Charge Controller" x={280} y={150} />
         <IconWrapper icon={Battery} label="Pin lưu trữ" x={480} y={150} />
         <BoxWrapper label="Inverter Off-Grid" x={680} y={150} />
