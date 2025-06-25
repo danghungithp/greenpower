@@ -5,34 +5,34 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 
 const videos = [
   {
-    id: 'u6Y7YqX_Y-0',
-    title: 'Hướng dẫn TỰ LẮP ĐẶT ĐIỆN MẶT TRỜI áp mái chi tiết',
-    description: 'Video hướng dẫn chi tiết các bước tự lắp đặt một hệ thống điện mặt trời áp mái cho gia đình.'
+    id: 'BqJd0b_2M5c',
+    title: 'Hướng Dẫn Lắp Đặt Điện Mặt Trời Cho Người Mới Bắt Đầu',
+    description: 'Video chi tiết về quy trình lắp đặt hệ thống điện mặt trời áp mái, phù hợp cho người mới.'
   },
   {
-    id: 'Cq_T-c_Qk-s',
-    title: 'Đầu tư điện mặt trời 2024: Nên hay không? | VTV24',
-    description: 'Phân tích xu hướng, chi phí và hiệu quả của việc đầu tư điện mặt trời trong năm 2024 từ kênh VTV24.'
+    id: '4p24-yFkGzY',
+    title: 'Có nên lắp Điện mặt trời năm 2024? Bài toán kinh tế',
+    description: 'Phân tích chi tiết về hiệu quả kinh tế, chi phí và lợi ích khi đầu tư điện mặt trời trong năm 2024.'
   },
   {
-    id: 'Vz-yM4o0ZcM',
-    title: 'Cách tính toán công suất hệ thống điện mặt trời',
-    description: 'Hướng dẫn chi tiết cách tính toán công suất hệ thống cần lắp, chi phí và thời gian hoàn vốn.'
+    id: 'Rj7c_B2z_gY',
+    title: 'Báo Giá Chi Tiết Hệ Thống Điện Mặt Trời 5kWp Mới Nhất',
+    description: 'Cung cấp thông tin tham khảo về chi phí trọn gói cho một hệ thống điện mặt trời công suất 5kWp.'
   },
   {
-    id: '5z_2yO6n-m8',
-    title: 'Cách sử dụng điện mặt trời hiệu quả, tiết kiệm điện',
-    description: 'Các mẹo và kinh nghiệm thực tế để tối ưu hóa việc sử dụng năng lượng từ hệ thống điện mặt trời của bạn.'
+    id: 'wO_GvVyb1cc',
+    title: 'Hệ Thống Điện Năng Lượng Mặt Trời Hybrid Là Gì?',
+    description: 'Giải thích nguyên lý hoạt động, ưu và nhược điểm của hệ thống điện mặt trời hybrid (hòa lưới có lưu trữ).'
   },
   {
-    id: 'Jg_T5g3a1Jc',
-    title: 'Tự lắp đặt hệ thống điện mặt trời 5.5kWp cho gia đình',
-    description: 'Một video hướng dẫn thực tế về việc lắp đặt một hệ thống điện mặt trời hòa lưới cho gia đình.'
+    id: 'uYf9fA_wWwE',
+    title: '10 Sai Lầm Cần Tránh Khi Lắp Điện Mặt Trời',
+    description: 'Tổng hợp những kinh nghiệm và sai lầm thường gặp để giúp bạn có một hệ thống hiệu quả và bền bỉ.'
   },
    {
-    id: 'uRlaDe_HpSo',
-    title: 'Cách sử dụng điện mặt trời Hybrid hiệu quả nhất',
-    description: 'Tìm hiểu về nguyên lý hoạt động và cách cài đặt để tối ưu hóa hệ thống điện mặt trời Hybrid.'
+    id: 'm4uQy-v8H7I',
+    title: 'Cách Tính Toán Hệ Thống Điện Mặt Trời Độc Lập (Off-Grid)',
+    description: 'Hướng dẫn chi tiết các bước tính toán công suất pin, inverter và bộ lưu trữ cho hệ thống off-grid.'
   }
 ];
 
