@@ -8,6 +8,7 @@ export type BuildSolarSystemOutput = {
   specifications: {
     component: string;
     details: string;
+    referenceUrl?: string;
   }[];
   billOfMaterials: {
     item: string;

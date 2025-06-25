@@ -28,6 +28,7 @@ const BuildSolarSystemOutputSchema = z.object({
     z.object({
       component: z.string().describe('Tên thiết bị.'),
       details: z.string().describe('Thông số kỹ thuật chi tiết của thiết bị.'),
+      referenceUrl: z.string().optional().describe('URL tham khảo cho sản phẩm nếu có.'),
     })
   ),
   billOfMaterials: z.array(
@@ -68,6 +69,7 @@ Nhiệm vụ của bạn:
 1.  **Tạo bảng thông số kỹ thuật (specifications):**
     *   Liệt kê các thông số kỹ thuật chính cho các thiết bị quan trọng như Tấm pin, Inverter, và Pin lưu trữ (nếu có và phù hợp với loại hệ thống).
     *   Chọn các thông số thực tế và phù hợp với công suất hệ thống. Ví dụ: công suất tấm pin, hiệu suất, loại inverter (hòa lưới, hybrid, off-grid), công suất inverter, dải điện áp MPPT, dung lượng và loại pin lưu trữ.
+    *   Nếu tìm thấy sản phẩm tương ứng trong dữ liệu tùy chỉnh, hãy thêm URL tham khảo vào trường 'referenceUrl'.
 
 2.  **Tạo bảng vật tư và chi phí (billOfMaterials):**
     *   Liệt kê tất cả các thiết bị và vật tư chính cần thiết.
@@ -75,7 +77,7 @@ Nhiệm vụ của bạn:
     *   Cung cấp đơn giá và thành tiền ước tính bằng Việt Nam Đồng (₫), sử dụng các con số thực tế trên thị trường Việt Nam. Bao gồm các hạng mục như: Tấm pin, Inverter, Pin lưu trữ (nếu có), Tủ điện, Dây dẫn, Giàn khung, và chi phí nhân công lắp đặt.
 
 {{#if customData}}
-Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho việc báo giá. Nếu tìm thấy một sản phẩm phù hợp trong danh sách này, hãy điền URL của nó vào trường 'referenceUrl' của mục tương ứng trong bảng vật tư.
+Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho việc tạo thông số kỹ thuật và báo giá. Nếu tìm thấy một sản phẩm phù hợp trong danh sách này, hãy điền URL của nó vào trường 'referenceUrl' của mục tương ứng trong cả bảng thông số kỹ thuật và bảng vật tư.
 ---
 {{{customData}}}
 ---

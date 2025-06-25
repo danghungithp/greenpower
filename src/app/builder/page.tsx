@@ -253,6 +253,7 @@ export default function BuilderPage() {
                   <TableRow>
                     <TableHead className="w-[200px]">Thiết bị</TableHead>
                     <TableHead>Thông số chi tiết</TableHead>
+                    <TableHead className="text-right">Tham khảo</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -260,6 +261,20 @@ export default function BuilderPage() {
                     <TableRow key={index}>
                       <TableCell className="font-medium">{spec.component}</TableCell>
                       <TableCell>{spec.details}</TableCell>
+                      <TableCell className="text-right">
+                        {spec.referenceUrl ? (
+                          <Link
+                            href={spec.referenceUrl}
+                            target="_blank"
+                            className="inline-flex items-center text-sm text-primary underline-offset-4 hover:underline"
+                          >
+                            Xem chi tiết
+                            <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                          </Link>
+                        ) : (
+                          '-'
+                        )}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
