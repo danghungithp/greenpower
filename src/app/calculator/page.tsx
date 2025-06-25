@@ -139,6 +139,7 @@ export default function CalculatorPage() {
                     <div className="space-y-2">
                         <Label htmlFor="cons">Tiêu thụ điện (kWh/tháng)</Label>
                         <Input id="cons" type="number" value={cons} onChange={(e) => setCons(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Hóa đơn tiền điện hàng tháng của bạn cho biết chỉ số này.</p>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="mode">Mô hình</Label>
@@ -152,36 +153,44 @@ export default function CalculatorPage() {
                                 <SelectItem value="offgrid">Off-grid (độc lập)</SelectItem>
                             </SelectContent>
                         </Select>
+                        <p className="text-sm text-muted-foreground pt-1">Chọn mô hình hệ thống phù hợp với nhu cầu của bạn.</p>
                     </div>
                     {mode !== 'grid' && (
                          <div className="space-y-2">
                             <Label htmlFor="storage">Dung lượng pin (kWh)</Label>
                             <Input id="storage" type="number" value={storage} onChange={(e) => setStorage(e.target.value)} />
+                             <p className="text-sm text-muted-foreground pt-1">Tổng dung lượng lưu trữ của hệ thống pin, ảnh hưởng đến khả năng hoạt động khi mất điện.</p>
                         </div>
                     )}
                     <div className="space-y-2">
                         <Label htmlFor="pricePV">Giá PV (₫/kWp)</Label>
                         <Input id="pricePV" type="number" value={pricePV} onChange={(e) => setPricePV(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Chi phí đầu tư cho mỗi kilowatt-peak (kWp) tấm pin mặt trời.</p>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="priceStorage">Giá pin (₫/kWh)</Label>
                         <Input id="priceStorage" type="number" value={priceStorage} onChange={(e) => setPriceStorage(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Chi phí đầu tư cho mỗi kilowatt-giờ (kWh) dung lượng pin lưu trữ.</p>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="effInv">Hiệu suất inverter (%)</Label>
                         <Input id="effInv" type="number" value={effInv} onChange={(e) => setEffInv(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Tỷ lệ điện DC từ pin được chuyển đổi thành điện AC để sử dụng, thường từ 95-98%.</p>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="dod">DOD pin (%)</Label>
                         <Input id="dod" type="number" value={dod} onChange={(e) => setDod(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Độ xả sâu (Depth of Discharge) - Tỷ lệ phần trăm dung lượng pin được sử dụng.</p>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="priceElec">Giá điện hiện tại (₫/kWh)</Label>
                         <Input id="priceElec" type="number" value={priceElec} onChange={(e) => setPriceElec(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Chi phí bạn đang trả cho mỗi kWh điện từ lưới điện quốc gia.</p>
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="incRate">Tăng giá điện hàng năm (%)</Label>
                         <Input id="incRate" type="number" value={incRate} onChange={(e) => setIncRate(e.target.value)} />
+                        <p className="text-sm text-muted-foreground pt-1">Tỷ lệ dự kiến giá điện sẽ tăng mỗi năm, ảnh hưởng đến tính toán tiết kiệm dài hạn.</p>
                     </div>
                 </CardContent>
             </Card>
@@ -245,4 +254,3 @@ export default function CalculatorPage() {
         </div>
     );
 }
-
