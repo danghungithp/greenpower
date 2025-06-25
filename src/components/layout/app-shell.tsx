@@ -92,7 +92,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   >
                     <Avatar>
                       <AvatarImage
-                        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80"
                         alt="Quản trị viên"
                       />
                       <AvatarFallback>A</AvatarFallback>
