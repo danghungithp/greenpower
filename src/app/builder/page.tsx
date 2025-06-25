@@ -47,6 +47,32 @@ export default function BuilderPage() {
   const [error, setError] = React.useState<string | null>(null);
   const [result, setResult] = React.useState<BuildSolarSystemOutput | null>(null);
   const [editableBOM, setEditableBOM] = React.useState<BillOfMaterialsItem[] | null>(null);
+  const [diagramReferenceUrl, setDiagramReferenceUrl] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const customData = localStorage.getItem(LOCAL_STORAGE_KEY) || '';
+    if (customData) {
+      const lines = customData.split('\n');
+      const urlRegex = /(https?:\/\/[^\s]+)/;
+      
+      const diagramLine = lines.find(line => line.toLowerCase().includes('sơ đồ') || line.toLowerCase().includes('so-do') || line.toLowerCase().includes('diagram'));
+      if (diagramLine) {
+        const match = diagramLine.match(urlRegex);
+        if (match) {
+          setDiagramReferenceUrl(match[0]);
+          return;
+        }
+      }
+      
+      const firstLineWithUrl = lines.find(line => urlRegex.test(line));
+      if (firstLineWithUrl) {
+          const match = firstLineWithUrl.match(urlRegex);
+          if (match) {
+              setDiagramReferenceUrl(match[0]);
+          }
+      }
+    }
+  }, []);
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -202,6 +228,16 @@ export default function BuilderPage() {
             <CardContent>
               <SolarSystemDiagram systemType={systemType} />
             </CardContent>
+            {diagramReferenceUrl && (
+              <CardFooter>
+                 <Button asChild variant="outline">
+                    <Link href={diagramReferenceUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Tham khảo thêm
+                    </Link>
+                  </Button>
+              </CardFooter>
+            )}
           </Card>
 
           <Card>
