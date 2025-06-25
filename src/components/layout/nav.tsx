@@ -22,9 +22,9 @@ import { useAuth } from '@/context/auth-context';
 const navItems = [
   { href: '/', label: 'AI Hỗ trợ', icon: BotMessageSquare },
   { href: '/builder', label: 'Xây dựng Hệ thống', icon: Construction },
+  { href: '/calculator', label: 'Công cụ tính toán', icon: Calculator },
   { href: '/posts', label: 'Bài viết', icon: FileText },
   { href: '/videos', label: 'Videos', icon: Video },
-  { href: '/calculator', label: 'Công cụ tính toán', icon: Calculator },
   { href: '/products', label: 'Sản phẩm', icon: Package },
 ];
 
