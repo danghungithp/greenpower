@@ -9,16 +9,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Nav } from '@/components/layout/nav';
 import { LogOut, Zap } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
 import React from 'react';
 import { useAuth } from '@/context/auth-context';
@@ -81,33 +72,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </div>
 
             {isLoading ? (
-              <Skeleton className="h-10 w-10 rounded-full" />
+              <Skeleton className="h-10 w-28 rounded-md" />
             ) : isAuthenticated ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="overflow-hidden rounded-full"
-                  >
-                    <Avatar>
-                      <AvatarImage
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80"
-                        alt="Quản trị viên"
-                      />
-                      <AvatarFallback>A</AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Admin</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
-                    <LogOut className="mr-2" />
-                    <span>Đăng xuất</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Button onClick={logout} variant="outline">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Đăng xuất</span>
+              </Button>
             ) : (
               <Button asChild>
                 <Link href="/login">Đăng nhập</Link>
