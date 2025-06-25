@@ -8,7 +8,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { Nav } from '@/components/layout/nav';
-import { Zap } from 'lucide-react';
+import { LogOut, Zap } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import {
@@ -21,8 +21,13 @@ import {
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
 import React from 'react';
+import { useAuth } from '@/context/auth-context';
+import { Skeleton } from '../ui/skeleton';
+import Link from 'next/link';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated, logout, isLoading } = useAuth();
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
@@ -75,31 +80,39 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               />
             </div>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="overflow-hidden rounded-full"
-                >
-                  <Avatar>
-                    <AvatarImage
-                      src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                      alt="Quản trị viên"
-                    />
-                    <AvatarFallback>A</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Cài đặt</DropdownMenuItem>
-                <DropdownMenuItem>Hỗ trợ</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Đăng xuất</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {isLoading ? (
+              <Skeleton className="h-10 w-10 rounded-full" />
+            ) : isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="overflow-hidden rounded-full"
+                  >
+                    <Avatar>
+                      <AvatarImage
+                        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                        alt="Quản trị viên"
+                      />
+                      <AvatarFallback>A</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Admin</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
+                    <LogOut className="mr-2" />
+                    <span>Đăng xuất</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button asChild>
+                <Link href="/login">Đăng nhập</Link>
+              </Button>
+            )}
           </header>
           <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
         </SidebarInset>

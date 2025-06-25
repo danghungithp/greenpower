@@ -1,26 +1,38 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/auth-context';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Lightbulb } from "lucide-react";
+import { Lightbulb, Loader2 } from "lucide-react";
 
 const LOCAL_STORAGE_KEY = 'customSolarDataSource';
 
 export default function AdminPage() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
   const [customData, setCustomData] = React.useState('');
   const { toast } = useToast();
 
-  React.useEffect(() => {
-    const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (savedData) {
-      setCustomData(savedData);
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
     }
-  }, []);
+  }, [isAuthenticated, isLoading, router]);
+  
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (savedData) {
+        setCustomData(savedData);
+      }
+    }
+  }, [isAuthenticated]);
 
   const handleSaveCustomData = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, customData);
@@ -29,6 +41,14 @@ export default function AdminPage() {
       description: "Nguồn dữ liệu tùy chỉnh của bạn đã được cập nhật và sẽ được sử dụng cho các gợi ý AI.",
     });
   };
+
+  if (isLoading || !isAuthenticated) {
+    return (
+      <div className="flex h-[calc(100vh-10rem)] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
