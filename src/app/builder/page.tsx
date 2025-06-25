@@ -38,17 +38,17 @@ import Link from 'next/link';
 
 const diagramMap = {
   'grid-tie': {
-    src: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Grid-Tied_Solar_Power_System_Diagram.png',
+    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-hoa-luoi-1.jpg',
     alt: 'Sơ đồ hệ thống hòa lưới',
     hint: 'grid-tie solar diagram'
   },
   'hybrid': {
-    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Solar_panel_system_with_battery_storage_and_grid-connection_V2.svg/1280px-Solar_panel_system_with_battery_storage_and_grid-connection_V2.svg.png',
+    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-Hybrid-1.jpg',
     alt: 'Sơ đồ hệ thống hybrid',
     hint: 'hybrid solar diagram'
   },
   'off-grid': {
-    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Off-grid-home-solar-power-system-diagram.svg/1024px-Off-grid-home-solar-power-system-diagram.svg.png',
+    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-doc-lap-off-grid-1.jpg',
     alt: 'Sơ đồ hệ thống độc lập',
     hint: 'off-grid solar diagram'
   },
