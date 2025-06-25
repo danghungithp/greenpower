@@ -46,7 +46,7 @@ const prompt = ai.definePrompt({
   name: 'suggestSolarSystemPrompt',
   input: {schema: SuggestSolarSystemInputSchema},
   output: {schema: SuggestSolarSystemOutputSchema},
-  prompt: `Bạn là một chuyên gia tư vấn năng lượng mặt trời. Dựa vào vị trí, nhu cầu năng lượng và diện tích mái nhà của chủ nhà, hãy đề xuất một hệ thống pin mặt trời phù hợp. Hãy định dạng câu trả lời của bạn bằng Markdown để dễ đọc, sử dụng danh sách (ví dụ: các gạch đầu dòng) và in đậm khi cần thiết. Cung cấp chi tiết về loại pin, số lượng pin, loại biến tần, chi phí ước tính, tiền tiết kiệm hàng tháng/hàng năm và tác động đến môi trường. Trả lời bằng tiếng Việt.
+  prompt: `Bạn là một chuyên gia tư vấn năng lượng mặt trời. Dựa vào vị trí, nhu cầu năng lượng và diện tích mái nhà của chủ nhà, hãy đề xuất một hệ thống pin mặt trời phù hợp. Hãy định dạng câu trả lời của bạn bằng Markdown để dễ đọc, sử dụng danh sách (ví dụ: các gạch đầu dòng) và in đậm khi cần thiết. Khi bạn bao gồm các đường dẫn URL, hãy đảm bảo chúng là các liên kết có thể nhấp được bằng cách sử dụng cú pháp Markdown (ví dụ: [Tên sản phẩm](URL)). Cung cấp chi tiết về loại pin, số lượng pin, loại biến tần, chi phí ước tính, tiền tiết kiệm hàng tháng/hàng năm và tác động đến môi trường. Trả lời bằng tiếng Việt.
 
 {{#if customData}}
 Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho đề xuất của bạn:

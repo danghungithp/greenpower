@@ -13,6 +13,8 @@ const MarkdownRenderer = ({ children }: { children: string }) => {
         components={{
           a: ({ node, ...props }) => (
             <a
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-primary underline transition-colors hover:text-primary/80"
               {...props}
             />
