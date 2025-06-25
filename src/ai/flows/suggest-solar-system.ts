@@ -21,6 +21,7 @@ const SuggestSolarSystemInputSchema = z.object({
   roofSize: z
     .string()
     .describe('Diện tích mái nhà có sẵn tính bằng mét vuông.'),
+  customData: z.string().optional().describe('Dữ liệu tùy chỉnh do người dùng cung cấp, chẳng hạn như URL sản phẩm hoặc các ghi chú cụ thể để đưa vào đề xuất.'),
 });
 export type SuggestSolarSystemInput = z.infer<typeof SuggestSolarSystemInputSchema>;
 
@@ -47,6 +48,14 @@ const prompt = ai.definePrompt({
   output: {schema: SuggestSolarSystemOutputSchema},
   prompt: `Bạn là một chuyên gia tư vấn năng lượng mặt trời. Dựa vào vị trí, nhu cầu năng lượng và diện tích mái nhà của chủ nhà, hãy đề xuất một hệ thống pin mặt trời phù hợp. Cung cấp chi tiết về loại pin, số lượng pin, loại biến tần, chi phí ước tính, tiền tiết kiệm hàng tháng/hàng năm và tác động đến môi trường. Trả lời bằng tiếng Việt.
 
+{{#if customData}}
+Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho đề xuất của bạn:
+---
+{{{customData}}}
+---
+{{/if}}
+
+Dưới đây là thông tin chi tiết của khách hàng:
 Vị trí: {{{location}}}
 Nhu cầu năng lượng: {{{energyRequirements}}} kWh/tháng
 Diện tích mái: {{{roofSize}}} m²`,
