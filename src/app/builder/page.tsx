@@ -127,15 +127,15 @@ export default function BuilderPage() {
         'Hạng mục': item.item,
         'Số lượng': item.quantity,
         'Đơn giá': item.price,
-        'Thành tiền': item.total,
         'Tham khảo': item.referenceUrl || '',
+        'Thành tiền': item.total,
       })),
       {
         'Hạng mục': 'Tổng cộng',
         'Số lượng': '',
         'Đơn giá': '',
-        'Thành tiền': new Intl.NumberFormat('vi-VN').format(grandTotal) + ' ₫',
         'Tham khảo': '',
+        'Thành tiền': new Intl.NumberFormat('vi-VN').format(grandTotal) + ' ₫',
       },
     ];
 
@@ -291,11 +291,14 @@ export default function BuilderPage() {
                       <TableCell className="text-right">{item.price}</TableCell>
                       <TableCell className="text-right">
                         {item.referenceUrl ? (
-                          <Button asChild variant="ghost" size="icon">
-                            <Link href={item.referenceUrl} target="_blank">
-                              <ExternalLink className="h-4 w-4" />
-                            </Link>
-                          </Button>
+                          <Link
+                            href={item.referenceUrl}
+                            target="_blank"
+                            className="inline-flex items-center text-sm text-primary underline-offset-4 hover:underline"
+                          >
+                            Tham khảo thêm
+                            <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                          </Link>
                         ) : (
                           '-'
                         )}
