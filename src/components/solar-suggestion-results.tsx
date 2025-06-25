@@ -1,6 +1,37 @@
 import type { SuggestSolarSystemOutput } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cpu, DollarSign, Leaf } from 'lucide-react';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+const MarkdownRenderer = ({ children }: { children: string }) => {
+  return (
+    <div className="prose prose-sm dark:prose-invert max-w-none text-sm text-muted-foreground">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ node, ...props }) => (
+            <a
+              className="text-primary underline transition-colors hover:text-primary/80"
+              {...props}
+            />
+          ),
+          p: ({ node, ...props }) => <p className="mb-2 last:mb-0" {...props} />,
+          ul: ({ node, ...props }) => (
+            <ul className="list-disc space-y-1 pl-5" {...props} />
+          ),
+          ol: ({ node, ...props }) => (
+            <ol className="list-decimal space-y-1 pl-5" {...props} />
+          ),
+          li: ({ node, ...props }) => <li className="pl-1" {...props} />,
+        }}
+      >
+        {children}
+      </ReactMarkdown>
+    </div>
+  );
+};
 
 type SolarSuggestionResultsProps = {
   suggestion: SuggestSolarSystemOutput;
@@ -19,9 +50,7 @@ export function SolarSuggestionResults({ suggestion }: SolarSuggestionResultsPro
             <Cpu className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground whitespace-pre-wrap font-code">
-              {suggestion.systemSuggestion}
-            </p>
+            <MarkdownRenderer>{suggestion.systemSuggestion}</MarkdownRenderer>
           </CardContent>
         </Card>
         <Card>
@@ -32,9 +61,7 @@ export function SolarSuggestionResults({ suggestion }: SolarSuggestionResultsPro
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-              {suggestion.estimatedSavings}
-            </p>
+            <MarkdownRenderer>{suggestion.estimatedSavings}</MarkdownRenderer>
           </CardContent>
         </Card>
         <Card>
@@ -45,9 +72,7 @@ export function SolarSuggestionResults({ suggestion }: SolarSuggestionResultsPro
             <Leaf className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-              {suggestion.environmentalImpact}
-            </p>
+            <MarkdownRenderer>{suggestion.environmentalImpact}</MarkdownRenderer>
           </CardContent>
         </Card>
       </div>
