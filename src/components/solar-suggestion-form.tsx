@@ -16,7 +16,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
-import { Textarea } from '@/components/ui/textarea';
 
 export const solarSuggestionFormSchema = z.object({
   location: z.string().min(2, {
@@ -28,7 +27,6 @@ export const solarSuggestionFormSchema = z.object({
   roofSize: z.string().refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
     message: 'Vui lòng nhập một số hợp lệ cho diện tích mái.',
   }),
-  customData: z.string().optional(),
 });
 
 export type SolarSuggestionFormValues = z.infer<typeof solarSuggestionFormSchema>;
@@ -36,17 +34,15 @@ export type SolarSuggestionFormValues = z.infer<typeof solarSuggestionFormSchema
 type SolarSuggestionFormProps = {
   onSubmit: (data: SolarSuggestionFormValues) => void;
   isLoading: boolean;
-  showCustomDataField?: boolean;
 };
 
-export function SolarSuggestionForm({ onSubmit, isLoading, showCustomDataField = false }: SolarSuggestionFormProps) {
+export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionFormProps) {
   const form = useForm<SolarSuggestionFormValues>({
     resolver: zodResolver(solarSuggestionFormSchema),
     defaultValues: {
       location: '',
       energyRequirements: '',
       roofSize: '',
-      customData: '',
     },
   });
 
@@ -102,30 +98,6 @@ export function SolarSuggestionForm({ onSubmit, isLoading, showCustomDataField =
                 )}
               />
             </div>
-
-            {showCustomDataField && (
-               <FormField
-                control={form.control}
-                name="customData"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nguồn dữ liệu tùy chỉnh (tùy chọn)</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Dán các URL sản phẩm, bài viết, hoặc ghi chú của bạn vào đây..."
-                        className="min-h-[120px]"
-                        {...field}
-                        disabled={isLoading}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      Cung cấp thêm thông tin để AI đưa ra gợi ý chính xác hơn dựa trên dữ liệu của bạn.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
