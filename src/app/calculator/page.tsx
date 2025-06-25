@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Lightbulb, LineChart as LineChartIcon } from 'lucide-react';
+import { Lightbulb, LineChart as LineChartIcon, Info } from 'lucide-react';
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from '@/components/ui/chart';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, ResponsiveContainer } from 'recharts';
 
@@ -118,6 +118,22 @@ export default function CalculatorPage() {
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
                 Công cụ tính toán đầu tư điện mặt trời
             </h1>
+            <Alert>
+                <Info className="h-4 w-4" />
+                <AlertTitle>Về Độ Chính Xác Của Công Cụ</AlertTitle>
+                <AlertDescription>
+                    <p className="mb-2">
+                        Công cụ này cung cấp một <strong>ước tính ban đầu</strong> để bạn tham khảo. Các công thức được xây dựng dựa trên tiêu chuẩn ngành nhưng có một số giả định để đơn giản hóa:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1">
+                        <li><strong>Số giờ nắng:</strong> Giả định cố định là 4.5 giờ/ngày. Con số này có thể thay đổi tùy thuộc vào vị trí địa lý và thời gian trong năm.</li>
+                        <li><strong>Hiệu quả hệ thống:</strong> Kết quả tính toán phụ thuộc hoàn toàn vào các thông số đầu vào do bạn cung cấp.</li>
+                    </ul>
+                    <p className="mt-2 font-medium">
+                       <strong>Lưu ý quan trọng:</strong> Thông số <strong>"DOD pin (%)" (Độ xả sâu)</strong> hiện chưa được áp dụng vào công thức tính. Điều này ảnh hưởng đến độ chính xác của kết quả, đặc biệt là với hệ thống Hybrid và Off-grid.
+                    </p>
+                </AlertDescription>
+            </Alert>
              <Alert>
                 <Lightbulb className="h-4 w-4" />
                 <AlertTitle>Hướng dẫn sử dụng</AlertTitle>
