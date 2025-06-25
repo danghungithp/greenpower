@@ -7,6 +7,8 @@ import { SolarSuggestionForm, type SolarSuggestionFormValues } from "@/component
 import { SolarSuggestionResults } from "@/components/solar-suggestion-results";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const LOCAL_STORAGE_KEY = 'customSolarDataSource';
+
 export default function Home() {
   const [suggestion, setSuggestion] =
     React.useState<SuggestSolarSystemOutput | null>(null);
@@ -18,7 +20,14 @@ export default function Home() {
     setError(null);
     setSuggestion(null);
 
-    const result = await suggestSolarSystemAction(formData);
+    const customData = localStorage.getItem(LOCAL_STORAGE_KEY) || '';
+
+    const submissionData = {
+      ...formData,
+      customData,
+    };
+
+    const result = await suggestSolarSystemAction(submissionData);
     
     setIsLoading(false);
     if (result.error) {
