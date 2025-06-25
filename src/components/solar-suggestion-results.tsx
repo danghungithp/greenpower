@@ -1,10 +1,11 @@
 import type { SuggestSolarSystemOutput } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Cpu, DollarSign, Leaf, Zap, PanelTop, GitBranch, Battery, PiggyBank } from 'lucide-react';
+import { Cpu, DollarSign, Leaf, Zap, PanelTop, GitBranch, Battery, PiggyBank, ExternalLink } from 'lucide-react';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Separator } from './ui/separator';
+import Link from 'next/link';
 
 const MarkdownRenderer = ({ children }: { children: string }) => {
   return (
@@ -40,14 +41,28 @@ type ResultItemProps = {
   icon: React.ElementType;
   label: string;
   value: React.ReactNode;
+  referenceUrl?: string;
 }
 
-const ResultItem = ({ icon: Icon, label, value }: ResultItemProps) => (
+const ResultItem = ({ icon: Icon, label, value, referenceUrl }: ResultItemProps) => (
   <div className="flex items-start">
     <Icon className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
     <div>
       <p className="font-medium text-foreground">{label}</p>
-      <p className="text-muted-foreground">{value}</p>
+      <div className="flex items-center gap-2">
+        <p className="text-muted-foreground">{value}</p>
+        {referenceUrl && (
+          <Link
+            href={referenceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-xs text-primary underline-offset-4 hover:underline"
+          >
+            Tham khảo
+            <ExternalLink className="ml-1 h-3 w-3" />
+          </Link>
+        )}
+      </div>
     </div>
   </div>
 );
@@ -73,10 +88,25 @@ export function SolarSuggestionResults({ suggestion }: SolarSuggestionResultsPro
           </CardHeader>
           <CardContent className="space-y-4">
              <ResultItem icon={Zap} label="Loại hệ thống" value={systemType} />
-             <ResultItem icon={PanelTop} label="Tấm pin" value={`${panel.quantity} x ${panel.type} (Tổng: ${panel.totalPower})`} />
-             <ResultItem icon={GitBranch} label="Inverter" value={inverter.type} />
+             <ResultItem 
+                icon={PanelTop} 
+                label="Tấm pin" 
+                value={`${panel.quantity} x ${panel.type} (Tổng: ${panel.totalPower})`}
+                referenceUrl={panel.referenceUrl}
+              />
+             <ResultItem 
+                icon={GitBranch} 
+                label="Inverter" 
+                value={inverter.type}
+                referenceUrl={inverter.referenceUrl}
+              />
              {storage.needed && storage.capacity && (
-               <ResultItem icon={Battery} label="Lưu trữ" value={storage.capacity} />
+               <ResultItem 
+                  icon={Battery} 
+                  label="Lưu trữ" 
+                  value={storage.capacity}
+                  referenceUrl={storage.referenceUrl}
+                />
              )}
             <Separator />
             <ResultItem icon={PiggyBank} label="Chi phí ước tính" value={<span className="font-bold text-lg text-primary">{estimatedCost}</span>} />

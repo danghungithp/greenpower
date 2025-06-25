@@ -4,13 +4,16 @@ export type SuggestSolarSystemOutput = {
     type: string;
     quantity: number;
     totalPower: string;
+    referenceUrl?: string;
   };
   inverter: {
     type: string;
+    referenceUrl?: string;
   };
   storage: {
     needed: boolean;
     capacity?: string;
+    referenceUrl?: string;
   };
   estimatedCost: string;
   estimatedSavings: string;
