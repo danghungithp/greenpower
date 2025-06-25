@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     'sơ đồ đấu nối điện mặt trời',
     'tính toán điện mặt trời'
   ],
+  icons: null,
 };
 
 export default function RootLayout({
