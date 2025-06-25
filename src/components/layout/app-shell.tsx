@@ -72,7 +72,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </svg>
               <Input
                 type="search"
-                placeholder="Search..."
+                placeholder="Tìm kiếm..."
                 className="w-full rounded-lg bg-secondary pl-8 md:w-[200px] lg:w-[320px]"
               />
             </div>
@@ -87,19 +87,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   <Avatar>
                     <AvatarImage
                       src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                      alt="Admin"
+                      alt="Quản trị viên"
                     />
                     <AvatarFallback>A</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuItem>Cài đặt</DropdownMenuItem>
+                <DropdownMenuItem>Hỗ trợ</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem>Đăng xuất</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </header>

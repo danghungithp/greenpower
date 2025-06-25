@@ -19,13 +19,13 @@ import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   location: z.string().min(2, {
-    message: 'Location must be at least 2 characters.',
+    message: 'Vị trí phải có ít nhất 2 ký tự.',
   }),
   energyRequirements: z.string().refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-    message: 'Please enter a valid number for energy requirements.',
+    message: 'Vui lòng nhập một số hợp lệ cho nhu cầu năng lượng.',
   }),
   roofSize: z.string().refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-    message: 'Please enter a valid number for roof size.',
+    message: 'Vui lòng nhập một số hợp lệ cho diện tích mái.',
   }),
 });
 
@@ -47,7 +47,7 @@ export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionForm
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Project Information</CardTitle>
+        <CardTitle>Thông tin dự án</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -58,11 +58,11 @@ export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionForm
                 name="location"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Property Location</FormLabel>
+                    <FormLabel>Vị trí lắp đặt</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Ho Chi Minh City" {...field} disabled={isLoading} />
+                      <Input placeholder="ví dụ: Thành phố Hồ Chí Minh" {...field} disabled={isLoading} />
                     </FormControl>
-                    <FormDescription>City or region of the property.</FormDescription>
+                    <FormDescription>Thành phố hoặc khu vực của dự án.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -72,11 +72,11 @@ export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionForm
                 name="energyRequirements"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Monthly Energy Needs (kWh)</FormLabel>
+                    <FormLabel>Nhu cầu năng lượng hàng tháng (kWh)</FormLabel>
                     <FormControl>
                       <Input placeholder="e.g., 500" type="number" {...field} disabled={isLoading} />
                     </FormControl>
-                    <FormDescription>Average monthly electricity usage.</FormDescription>
+                    <FormDescription>Mức sử dụng điện trung bình hàng tháng.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -86,11 +86,11 @@ export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionForm
                 name="roofSize"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Available Roof Area (m²)</FormLabel>
+                    <FormLabel>Diện tích mái khả dụng (m²)</FormLabel>
                     <FormControl>
                       <Input placeholder="e.g., 50" type="number" {...field} disabled={isLoading} />
                     </FormControl>
-                    <FormDescription>The usable square meters of your roof.</FormDescription>
+                    <FormDescription>Diện tích mét vuông có thể sử dụng trên mái nhà của bạn.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -98,7 +98,7 @@ export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionForm
             </div>
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Generate Suggestion
+              Tạo gợi ý
             </Button>
           </form>
         </Form>

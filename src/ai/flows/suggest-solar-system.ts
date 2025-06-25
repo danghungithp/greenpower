@@ -14,26 +14,26 @@ import {z} from 'genkit';
 const SuggestSolarSystemInputSchema = z.object({
   location: z
     .string()
-    .describe('The location of the property (e.g., city, state).'),
+    .describe('Vị trí của dự án (ví dụ: thành phố, tỉnh).'),
   energyRequirements: z
     .string()
-    .describe('The average monthly energy consumption in kWh.'),
+    .describe('Mức tiêu thụ năng lượng trung bình hàng tháng tính bằng kWh.'),
   roofSize: z
     .string()
-    .describe('The available roof area in square feet.'),
+    .describe('Diện tích mái nhà có sẵn tính bằng mét vuông.'),
 });
 export type SuggestSolarSystemInput = z.infer<typeof SuggestSolarSystemInputSchema>;
 
 const SuggestSolarSystemOutputSchema = z.object({
   systemSuggestion: z
     .string()
-    .describe('A detailed suggestion for a solar panel system, including panel type, number of panels, inverter type, and estimated cost.'),
+    .describe('Một đề xuất chi tiết cho hệ thống pin mặt trời, bao gồm loại pin, số lượng pin, loại biến tần và chi phí ước tính.'),
   estimatedSavings: z
     .string()
-    .describe('An estimate of the monthly and annual savings from the solar panel system.'),
+    .describe('Ước tính khoản tiết kiệm hàng tháng và hàng năm từ hệ thống pin mặt trời.'),
   environmentalImpact: z
     .string()
-    .describe('The estimated reduction in carbon footprint from using the solar panel system.'),
+    .describe('Ước tính lượng khí thải carbon giảm được khi sử dụng hệ thống pin mặt trời.'),
 });
 export type SuggestSolarSystemOutput = z.infer<typeof SuggestSolarSystemOutputSchema>;
 
@@ -45,11 +45,11 @@ const prompt = ai.definePrompt({
   name: 'suggestSolarSystemPrompt',
   input: {schema: SuggestSolarSystemInputSchema},
   output: {schema: SuggestSolarSystemOutputSchema},
-  prompt: `You are a solar energy consultant. Based on the homeowner's location, energy requirements, and roof size, suggest an appropriate solar panel system. Provide details on panel type, number of panels, inverter type, estimated cost, monthly/annual savings, and environmental impact.
+  prompt: `Bạn là một chuyên gia tư vấn năng lượng mặt trời. Dựa vào vị trí, nhu cầu năng lượng và diện tích mái nhà của chủ nhà, hãy đề xuất một hệ thống pin mặt trời phù hợp. Cung cấp chi tiết về loại pin, số lượng pin, loại biến tần, chi phí ước tính, tiền tiết kiệm hàng tháng/hàng năm và tác động đến môi trường. Trả lời bằng tiếng Việt.
 
-Location: {{{location}}}
-Energy Requirements: {{{energyRequirements}}} kWh/month
-Roof Size: {{{roofSize}}} sq ft`,
+Vị trí: {{{location}}}
+Nhu cầu năng lượng: {{{energyRequirements}}} kWh/tháng
+Diện tích mái: {{{roofSize}}} m²`,
 });
 
 const suggestSolarSystemFlow = ai.defineFlow(

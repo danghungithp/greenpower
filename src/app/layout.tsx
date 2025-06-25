@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { AppShell } from "@/components/layout/app-shell";
 
 export const metadata: Metadata = {
-  title: "Lumos Static CMS",
-  description: "AI-Powered Static CMS for Solar Solutions",
+  title: "Lumos CMS",
+  description: "CMS tĩnh được hỗ trợ bởi AI cho các giải pháp năng lượng mặt trời",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

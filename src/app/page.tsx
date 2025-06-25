@@ -31,7 +31,7 @@ export default function Home() {
       setSuggestion(result);
     } else {
       setError(
-        "Failed to generate a suggestion. Please try again with different values."
+        "Không thể tạo đề xuất. Vui lòng thử lại với các giá trị khác."
       );
     }
   };
@@ -40,11 +40,10 @@ export default function Home() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
-          AI Solar System Suggestion
+          Gợi ý hệ thống năng lượng mặt trời bằng AI
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Fill in the details below to get a personalized solar panel system
-          recommendation from our AI.
+          Điền các thông tin chi tiết bên dưới để nhận được đề xuất hệ thống pin mặt trời được cá nhân hóa từ AI của chúng tôi.
         </p>
       </div>
       <SolarSuggestionForm onSubmit={handleSubmit} isLoading={isLoading} />
@@ -54,7 +53,7 @@ export default function Home() {
           className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
           role="alert"
         >
-          <p className="font-semibold">An error occurred</p>
+          <p className="font-semibold">Đã xảy ra lỗi</p>
           <p>{error}</p>
         </div>
       )}
