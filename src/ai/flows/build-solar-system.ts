@@ -69,11 +69,22 @@ Yêu cầu của người dùng:
 
 Nhiệm vụ của bạn:
 1.  **Tạo sơ đồ SVG (diagramSvg):**
-    *   Vẽ một sơ đồ đấu nối dạng SVG rõ ràng và chuyên nghiệp.
-    *   Bao gồm tất cả các thành phần chính phù hợp với loại hệ thống: Tấm pin NLMT (Solar Panels), Hộp nối DC (DC Combiner Box), Inverter, Tủ điện AC/DC, Đồng hồ điện hai chiều (cho hệ hòa lưới và hybrid), Tải tiêu thụ (AC Load), Lưới điện (Grid), và Bộ lưu trữ (Battery Storage, nếu là hybrid hoặc off-grid).
-    *   Ghi nhãn tất cả các thành phần và đường kết nối bằng tiếng Việt.
-    *   Sử dụng màu sắc để phân biệt đường dây: DC (đỏ/đen), AC (xanh/vàng/đỏ), đất (xanh lá).
-    *   Sơ đồ phải có nền trắng, dễ đọc và sắp xếp hợp lý.
+    *   Vẽ một sơ đồ đấu nối dạng SVG rõ ràng, chuyên nghiệp và **trông hiện đại**. Sơ đồ phải có nền trắng, dễ đọc và sắp xếp hợp lý.
+    *   **Thay vì các hình hộp đơn giản, hãy sử dụng các biểu tượng trực quan cho từng thành phần:**
+        *   **Tấm pin NLMT (Solar Panels):** Vẽ dưới dạng một mảng các hình chữ nhật màu xanh đậm, có lưới kẻ ô để trông giống một tấm pin thực tế.
+        *   **Inverter:** Vẽ là một hình hộp chữ nhật (màu xám hoặc bạc) có logo tia sét hoặc biểu tượng sóng sine nhỏ.
+        *   **Bộ lưu trữ (Battery Storage):** (Nếu có) Vẽ như một khối chữ nhật lớn hoặc một chồng pin có biểu tượng pin rõ ràng.
+        *   **Tủ điện AC/DC:** Một hình chữ nhật có các biểu tượng công tắc (circuit breaker) hoặc đèn LED nhỏ bên trong.
+        *   **Đồng hồ điện hai chiều:** Một hình tròn với các vạch số và một mũi tên hai chiều ở giữa.
+        *   **Lưới điện (Grid):** Biểu diễn bằng một biểu tượng cột điện cao thế.
+        *   **Tải tiêu thụ (AC Load):** Biểu diễn bằng một biểu tượng ngôi nhà hoặc bóng đèn.
+    *   Bao gồm tất cả các thành phần chính phù hợp với loại hệ thống được yêu cầu.
+    *   Ghi nhãn tất cả các thành phần và đường kết nối bằng tiếng Việt, phông chữ rõ ràng.
+    *   Sử dụng màu sắc để phân biệt rõ ràng các đường dây:
+        *   **DC:** Dây dương (+) màu đỏ, dây âm (-) màu đen.
+        *   **AC:** Sử dụng các màu như xanh, vàng, đỏ cho các pha.
+        *   **Nối đất (Ground):** Dây màu xanh lá cây hoặc xanh-vàng sọc.
+    *   Đảm bảo các đường kết nối được sắp xếp gọn gàng, tránh cắt chéo nhau một cách lộn xộn.
 
 2.  **Tạo bảng thông số kỹ thuật (specifications):**
     *   Liệt kê các thông số kỹ thuật chính cho các thiết bị quan trọng như Tấm pin, Inverter, và Pin lưu trữ (nếu có).
