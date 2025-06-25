@@ -75,8 +75,8 @@ export default function ProductsPage() {
         const dataAiHint = getAiHint(name);
         // "solar panel" -> "solar,panel" to use as keywords for Unsplash
         const keywords = dataAiHint.replace(/\s+/g, ','); 
-        // Add a random parameter based on index to get a stable unique image per product
-        const imageUrl = `https://source.unsplash.com/600x400/?${keywords}&random=${index}`;
+        // Use the 'featured' endpoint which is more reliable. Add a signature to get a stable unique image per product.
+        const imageUrl = `https://source.unsplash.com/featured/600x400/?${keywords}&sig=${index}`;
 
         return {
           name: name || "Sản phẩm chưa đặt tên",
