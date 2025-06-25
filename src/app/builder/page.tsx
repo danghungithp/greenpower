@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import {
   Card,
   CardContent,
@@ -29,6 +30,25 @@ import { Loader2 } from 'lucide-react';
 import { buildSolarSystemAction } from '../actions';
 import type { BuildSolarSystemOutput } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
+
+const diagramMap = {
+  'grid-tie': {
+    src: 'https://placehold.co/800x450.png',
+    alt: 'Sơ đồ hệ thống hòa lưới',
+    hint: 'grid-tie solar diagram'
+  },
+  'hybrid': {
+    src: 'https://placehold.co/800x450.png',
+    alt: 'Sơ đồ hệ thống hybrid',
+    hint: 'hybrid solar diagram'
+  },
+  'off-grid': {
+    src: 'https://placehold.co/800x450.png',
+    alt: 'Sơ đồ hệ thống độc lập',
+    hint: 'off-grid solar diagram'
+  },
+};
+
 
 export default function BuilderPage() {
   const [systemType, setSystemType] = React.useState('grid-tie');
@@ -140,9 +160,17 @@ export default function BuilderPage() {
             </CardHeader>
             <CardContent>
               <div
-                className="w-full overflow-x-auto rounded-lg border bg-background p-4"
-                dangerouslySetInnerHTML={{ __html: result.diagramSvg }}
-              />
+                className="w-full flex justify-center items-center overflow-hidden rounded-lg border bg-background p-4"
+              >
+                <Image
+                  src={diagramMap[systemType as keyof typeof diagramMap].src}
+                  alt={diagramMap[systemType as keyof typeof diagramMap].alt}
+                  width={800}
+                  height={450}
+                  data-ai-hint={diagramMap[systemType as keyof typeof diagramMap].hint}
+                  className="object-contain"
+                />
+              </div>
             </CardContent>
           </Card>
 

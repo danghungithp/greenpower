@@ -5,7 +5,6 @@ export type SuggestSolarSystemOutput = {
 };
 
 export type BuildSolarSystemOutput = {
-  diagramSvg: string;
   specifications: {
     component: string;
     details: string;
