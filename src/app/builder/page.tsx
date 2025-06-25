@@ -48,9 +48,9 @@ const diagramMap = {
     hint: 'hybrid solar diagram'
   },
   'off-grid': {
-    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-doc-lap-off-grid-1.jpg',
-    alt: 'Sơ đồ hệ thống độc lập',
-    hint: 'off-grid solar diagram'
+    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-doc-lap-co-may-phat-1.jpg',
+    alt: 'Sơ đồ hệ thống độc lập có máy phát',
+    hint: 'off-grid solar diagram generator'
   },
 };
 
