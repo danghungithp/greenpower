@@ -2,12 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
+import * as XLSX from 'xlsx';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from '@/components/ui/card';
 import {
   Select,
@@ -18,6 +20,7 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
@@ -25,11 +28,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableFooter as UiTableFooter,
 } from '@/components/ui/table';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ExternalLink, FileDown } from 'lucide-react';
 import { buildSolarSystemAction } from '../actions';
 import type { BuildSolarSystemOutput } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link';
 
 const diagramMap = {
   'grid-tie': {
@@ -49,24 +54,30 @@ const diagramMap = {
   },
 };
 
+const LOCAL_STORAGE_KEY = 'customSolarDataSource';
+
+type BillOfMaterialsItem = BuildSolarSystemOutput['billOfMaterials'][0];
 
 export default function BuilderPage() {
   const [systemType, setSystemType] = React.useState('grid-tie');
   const [powerCapacity, setPowerCapacity] = React.useState('3');
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const [result, setResult] = React.useState<BuildSolarSystemOutput | null>(
-    null
-  );
+  const [result, setResult] = React.useState<BuildSolarSystemOutput | null>(null);
+  const [editableBOM, setEditableBOM] = React.useState<BillOfMaterialsItem[] | null>(null);
 
   const handleSubmit = async () => {
     setIsLoading(true);
     setError(null);
     setResult(null);
+    setEditableBOM(null);
+
+    const customData = localStorage.getItem(LOCAL_STORAGE_KEY) || '';
 
     const response = await buildSolarSystemAction({
       systemType,
       powerCapacity: parseFloat(powerCapacity),
+      customData,
     });
 
     setIsLoading(false);
@@ -74,8 +85,67 @@ export default function BuilderPage() {
       setError(response.error);
     } else {
       setResult(response);
+      setEditableBOM(response.billOfMaterials);
     }
   };
+
+  const handleQuantityChange = (index: number, newQuantityStr: string) => {
+    if (!editableBOM) return;
+
+    const newQuantity = parseInt(newQuantityStr, 10);
+    const newBOM = [...editableBOM];
+    const item = newBOM[index];
+
+    if (!isNaN(newQuantity) && newQuantity >= 0) {
+      const price = parseFloat(item.price.replace(/[^0-9]/g, ''));
+      const newTotal = price * newQuantity;
+
+      newBOM[index] = {
+        ...item,
+        quantity: newQuantityStr,
+        total: new Intl.NumberFormat('vi-VN').format(newTotal) + ' ₫',
+      };
+      setEditableBOM(newBOM);
+    } else if (newQuantityStr === '') {
+      newBOM[index] = { ...item, quantity: '' };
+      setEditableBOM(newBOM);
+    }
+  };
+
+  const grandTotal = React.useMemo(() => {
+    if (!editableBOM) return 0;
+    return editableBOM.reduce((acc, item) => {
+      const total = parseFloat(item.total.replace(/[^0-9]/g, ''));
+      return acc + (isNaN(total) ? 0 : total);
+    }, 0);
+  }, [editableBOM]);
+
+  const handleExport = () => {
+    if (!editableBOM) return;
+    const dataToExport = [
+      ...editableBOM.map(item => ({
+        'Hạng mục': item.item,
+        'Số lượng': item.quantity,
+        'Đơn giá': item.price,
+        'Thành tiền': item.total,
+        'Tham khảo': item.referenceUrl || '',
+      })),
+      {
+        'Hạng mục': 'Tổng cộng',
+        'Số lượng': '',
+        'Đơn giá': '',
+        'Thành tiền': new Intl.NumberFormat('vi-VN').format(grandTotal) + ' ₫',
+        'Tham khảo': '',
+      },
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'BaoGiaDienMatTroi');
+    XLSX.writeFile(workbook, 'BaoGiaDienMatTroi.xlsx');
+  };
+
+  const formatCurrency = (value: number) => new Intl.NumberFormat('vi-VN').format(value) + ' ₫';
 
   return (
     <div className="space-y-8">
@@ -96,11 +166,7 @@ export default function BuilderPage() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="system-type">Loại hệ thống</Label>
-              <Select
-                value={systemType}
-                onValueChange={setSystemType}
-                disabled={isLoading}
-              >
+              <Select value={systemType} onValueChange={setSystemType} disabled={isLoading}>
                 <SelectTrigger id="system-type">
                   <SelectValue placeholder="Chọn loại hệ thống..." />
                 </SelectTrigger>
@@ -113,11 +179,7 @@ export default function BuilderPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="power-capacity">Công suất mong muốn</Label>
-              <Select
-                value={powerCapacity}
-                onValueChange={setPowerCapacity}
-                disabled={isLoading}
-              >
+              <Select value={powerCapacity} onValueChange={setPowerCapacity} disabled={isLoading}>
                 <SelectTrigger id="power-capacity">
                   <SelectValue placeholder="Chọn công suất..." />
                 </SelectTrigger>
@@ -138,10 +200,7 @@ export default function BuilderPage() {
       </Card>
 
       {error && (
-        <div
-          className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
-          role="alert"
-        >
+        <div className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive" role="alert">
           <p className="font-semibold">Đã xảy ra lỗi</p>
           <p>{error}</p>
         </div>
@@ -159,9 +218,7 @@ export default function BuilderPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div
-                className="w-full flex justify-center items-center overflow-hidden rounded-lg border bg-background p-4"
-              >
+              <div className="w-full flex justify-center items-center overflow-hidden rounded-lg border bg-background p-4">
                 <Image
                   src={diagramMap[systemType as keyof typeof diagramMap].src}
                   alt={diagramMap[systemType as keyof typeof diagramMap].alt}
@@ -192,9 +249,7 @@ export default function BuilderPage() {
                 <TableBody>
                   {result.specifications.map((spec, index) => (
                     <TableRow key={index}>
-                      <TableCell className="font-medium">
-                        {spec.component}
-                      </TableCell>
+                      <TableCell className="font-medium">{spec.component}</TableCell>
                       <TableCell>{spec.details}</TableCell>
                     </TableRow>
                   ))}
@@ -207,31 +262,66 @@ export default function BuilderPage() {
             <CardHeader>
               <CardTitle>Bảng vật tư và chi phí dự kiến</CardTitle>
               <CardDescription>
-                Chi phí ước tính cho các thiết bị và vật tư chính.
+                Chi phí ước tính cho các thiết bị và vật tư chính. Bạn có thể thay đổi số lượng để tính toán lại.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Hạng mục</TableHead>
-                    <TableHead className="text-center">Số lượng</TableHead>
+                    <TableHead className="w-[120px] text-center">Số lượng</TableHead>
                     <TableHead className="text-right">Đơn giá</TableHead>
+                    <TableHead className="text-right">Tham khảo</TableHead>
                     <TableHead className="text-right">Thành tiền</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {result.billOfMaterials.map((item, index) => (
+                  {editableBOM?.map((item, index) => (
                     <TableRow key={index}>
                       <TableCell className="font-medium">{item.item}</TableCell>
-                      <TableCell className="text-center">{item.quantity}</TableCell>
+                      <TableCell>
+                        <Input
+                          type="number"
+                          value={item.quantity}
+                          onChange={(e) => handleQuantityChange(index, e.target.value)}
+                          className="text-center"
+                        />
+                      </TableCell>
                       <TableCell className="text-right">{item.price}</TableCell>
+                      <TableCell className="text-right">
+                        {item.referenceUrl ? (
+                          <Button asChild variant="ghost" size="icon">
+                            <Link href={item.referenceUrl} target="_blank">
+                              <ExternalLink className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        ) : (
+                          '-'
+                        )}
+                      </TableCell>
                       <TableCell className="text-right">{item.total}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
+                <UiTableFooter>
+                  <TableRow>
+                    <TableCell colSpan={4} className="font-bold text-right text-base">
+                      Tổng cộng
+                    </TableCell>
+                    <TableCell className="font-bold text-right text-base">
+                      {formatCurrency(grandTotal)}
+                    </TableCell>
+                  </TableRow>
+                </UiTableFooter>
               </Table>
             </CardContent>
+            <CardFooter className="justify-end gap-2 pt-4">
+              <Button onClick={handleExport} disabled={!editableBOM}>
+                <FileDown className="mr-2 h-4 w-4" />
+                Xuất ra Excel
+              </Button>
+            </CardFooter>
           </Card>
         </div>
       )}

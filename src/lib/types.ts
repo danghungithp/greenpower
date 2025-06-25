@@ -14,5 +14,6 @@ export type BuildSolarSystemOutput = {
     quantity: string;
     price: string;
     total: string;
+    referenceUrl?: string;
   }[];
 };

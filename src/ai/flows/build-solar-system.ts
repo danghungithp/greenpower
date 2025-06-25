@@ -19,6 +19,7 @@ const BuildSolarSystemInputSchema = z.object({
   powerCapacity: z
     .number()
     .describe('Công suất mong muốn của hệ thống tính bằng kWp.'),
+  customData: z.string().optional().describe('Dữ liệu tùy chỉnh chứa URL sản phẩm hoặc các ghi chú để làm nguồn tham khảo cho việc báo giá.'),
 });
 export type BuildSolarSystemInput = z.infer<typeof BuildSolarSystemInputSchema>;
 
@@ -39,6 +40,7 @@ const BuildSolarSystemOutputSchema = z.object({
       total: z
         .string()
         .describe('Thành tiền, định dạng tiền tệ Việt Nam (₫).'),
+      referenceUrl: z.string().optional().describe('URL tham khảo cho sản phẩm nếu có.'),
     })
   ),
 });
@@ -71,6 +73,13 @@ Nhiệm vụ của bạn:
     *   Liệt kê tất cả các thiết bị và vật tư chính cần thiết.
     *   Ước tính số lượng cần thiết (ví dụ: số lượng tấm pin).
     *   Cung cấp đơn giá và thành tiền ước tính bằng Việt Nam Đồng (₫), sử dụng các con số thực tế trên thị trường Việt Nam. Bao gồm các hạng mục như: Tấm pin, Inverter, Pin lưu trữ (nếu có), Tủ điện, Dây dẫn, Giàn khung, và chi phí nhân công lắp đặt.
+
+{{#if customData}}
+Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho việc báo giá. Nếu tìm thấy một sản phẩm phù hợp trong danh sách này, hãy điền URL của nó vào trường 'referenceUrl' của mục tương ứng trong bảng vật tư.
+---
+{{{customData}}}
+---
+{{/if}}
 
 Hãy đảm bảo rằng tất cả các thông tin đều nhất quán và phù hợp với nhau.`,
 });
