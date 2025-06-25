@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 
-const formSchema = z.object({
+export const solarSuggestionFormSchema = z.object({
   location: z.string().min(2, {
     message: 'Vị trí phải có ít nhất 2 ký tự.',
   }),
@@ -31,14 +31,17 @@ const formSchema = z.object({
   customData: z.string().optional(),
 });
 
+export type SolarSuggestionFormValues = z.infer<typeof solarSuggestionFormSchema>;
+
 type SolarSuggestionFormProps = {
-  onSubmit: (data: z.infer<typeof formSchema>) => void;
+  onSubmit: (data: SolarSuggestionFormValues) => void;
   isLoading: boolean;
+  showCustomDataField?: boolean;
 };
 
-export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export function SolarSuggestionForm({ onSubmit, isLoading, showCustomDataField = false }: SolarSuggestionFormProps) {
+  const form = useForm<SolarSuggestionFormValues>({
+    resolver: zodResolver(solarSuggestionFormSchema),
     defaultValues: {
       location: '',
       energyRequirements: '',
@@ -100,27 +103,29 @@ export function SolarSuggestionForm({ onSubmit, isLoading }: SolarSuggestionForm
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="customData"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nguồn dữ liệu tùy chỉnh (tùy chọn)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Dán các URL sản phẩm, bài viết, hoặc ghi chú của bạn vào đây..."
-                      className="min-h-[120px]"
-                      {...field}
-                      disabled={isLoading}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Cung cấp thêm thông tin để AI đưa ra gợi ý chính xác hơn dựa trên dữ liệu của bạn.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {showCustomDataField && (
+               <FormField
+                control={form.control}
+                name="customData"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nguồn dữ liệu tùy chỉnh (tùy chọn)</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Dán các URL sản phẩm, bài viết, hoặc ghi chú của bạn vào đây..."
+                        className="min-h-[120px]"
+                        {...field}
+                        disabled={isLoading}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Cung cấp thêm thông tin để AI đưa ra gợi ý chính xác hơn dựa trên dữ liệu của bạn.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
 
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

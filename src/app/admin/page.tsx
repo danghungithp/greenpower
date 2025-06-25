@@ -7,7 +7,7 @@ import { SolarSuggestionForm, type SolarSuggestionFormValues } from "@/component
 import { SolarSuggestionResults } from "@/components/solar-suggestion-results";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function Home() {
+export default function AdminPage() {
   const [suggestion, setSuggestion] =
     React.useState<SuggestSolarSystemOutput | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -36,13 +36,13 @@ export default function Home() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
-          Gợi ý hệ thống năng lượng mặt trời bằng AI
+          Bảng điều khiển Quản trị viên
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Điền các thông tin chi tiết bên dưới để nhận được đề xuất hệ thống pin mặt trời được cá nhân hóa từ AI của chúng tôi.
+          Sử dụng công cụ gợi ý với nguồn dữ liệu tùy chỉnh để có kết quả tốt hơn.
         </p>
       </div>
-      <SolarSuggestionForm onSubmit={handleSubmit} isLoading={isLoading} />
+      <SolarSuggestionForm onSubmit={handleSubmit} isLoading={isLoading} showCustomDataField={true} />
 
       {error && (
         <div

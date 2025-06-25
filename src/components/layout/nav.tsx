@@ -12,12 +12,14 @@ import {
   Video,
   Calculator,
   Package,
+  Shield,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const navItems = [
   { href: '/', label: 'AI Hỗ trợ', icon: BotMessageSquare },
+  { href: '/admin', label: 'Quản trị', icon: Shield },
   { href: '/posts', label: 'Bài viết', icon: FileText },
   { href: '/videos', label: 'Videos', icon: Video },
   { href: '/calculator', label: 'Công cụ tính toán', icon: Calculator },
