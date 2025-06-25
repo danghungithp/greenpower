@@ -33,17 +33,17 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 const diagramMap = {
   'grid-tie': {
-    src: 'https://placehold.co/800x450.png',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Grid-tied_PV_system.svg/800px-Grid-tied_PV_system.svg.png',
     alt: 'Sơ đồ hệ thống hòa lưới',
     hint: 'grid-tie solar diagram'
   },
   'hybrid': {
-    src: 'https://placehold.co/800x450.png',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/PV-hybrid.svg/800px-PV-hybrid.svg.png',
     alt: 'Sơ đồ hệ thống hybrid',
     hint: 'hybrid solar diagram'
   },
   'off-grid': {
-    src: 'https://placehold.co/800x450.png',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Off-grid_PV_system.svg/800px-Off-grid_PV_system.svg.png',
     alt: 'Sơ đồ hệ thống độc lập',
     hint: 'off-grid solar diagram'
   },
@@ -248,16 +248,16 @@ function ResultsSkeleton() {
           <Skeleton className="h-4 w-2/3 mt-2" />
         </CardHeader>
         <CardContent>
-          <Skeleton className="h-64 w-full" />
+          <Skeleton className="h-[450px] w-full" />
         </CardContent>
       </Card>
       <Card>
         <CardHeader>
-          <Skeleton className="h-6 w-1/3" />
+           <Skeleton className="h-6 w-1/3" />
            <Skeleton className="h-4 w-2/3 mt-2" />
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
+           <div className="space-y-2">
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-8 w-full" />
