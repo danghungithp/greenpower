@@ -38,7 +38,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Zap className="size-5" />
               </Button>
               <h1 className="text-lg font-semibold tracking-tight font-headline">
-                Lumos
+                GreenPower
               </h1>
             </div>
           </SidebarHeader>

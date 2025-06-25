@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { AppShell } from "@/components/layout/app-shell";
 
 export const metadata: Metadata = {
-  title: "Lumos CMS",
-  description: "CMS tĩnh được hỗ trợ bởi AI cho các giải pháp năng lượng mặt trời",
+  title: "GreenPower",
+  description: "GreenPower - CMS tĩnh được hỗ trợ bởi AI cho các giải pháp năng lượng mặt trời",
 };
 
 export default function RootLayout({
