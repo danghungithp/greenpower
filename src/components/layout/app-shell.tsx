@@ -20,17 +20,15 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
-import { useIsMobile } from '@/hooks/use-mobile';
 import React from 'react';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const isMobile = useIsMobile();
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
         <Sidebar
           variant="sidebar"
-          collapsible={isMobile ? 'offcanvas' : 'icon'}
+          collapsible={'icon'}
         >
           <SidebarHeader>
             <div className="flex items-center gap-2 p-1">
