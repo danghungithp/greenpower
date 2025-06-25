@@ -1,10 +1,9 @@
 'use server';
 
-import { createAI } from 'ai/rsc';
 import { suggestSolarSystem } from '@/ai/flows/suggest-solar-system';
 import type { SuggestSolarSystemInput } from '@/ai/flows/suggest-solar-system';
 
-async function suggestSolarSystemAction(
+export async function suggestSolarSystemAction(
   input: SuggestSolarSystemInput
 ): Promise<any> {
   'use server';
@@ -16,9 +15,3 @@ async function suggestSolarSystemAction(
     return { error: e.message };
   }
 }
-
-export const AI = createAI({
-  actions: {
-    suggestSolarSystem: suggestSolarSystemAction,
-  },
-});

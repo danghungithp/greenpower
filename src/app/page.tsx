@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import { useActions } from "ai/react";
+import { suggestSolarSystemAction } from "@/app/actions";
 import type { SuggestSolarSystemOutput } from "@/lib/types";
 import { SolarSuggestionForm } from "@/components/solar-suggestion-form";
 import { SolarSuggestionResults } from "@/components/solar-suggestion-results";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { AI } from "@/app/actions";
 
 export default function Home() {
-  const { suggestSolarSystem } = useActions<typeof AI>();
   const [suggestion, setSuggestion] =
     React.useState<SuggestSolarSystemOutput | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -24,10 +22,12 @@ export default function Home() {
     setError(null);
     setSuggestion(null);
 
-    const result = await suggestSolarSystem(formData);
+    const result = await suggestSolarSystemAction(formData);
     
     setIsLoading(false);
-    if (result.systemSuggestion) {
+    if (result.error) {
+      setError(result.error);
+    } else if (result.systemSuggestion) {
       setSuggestion(result);
     } else {
       setError(
