@@ -3,15 +3,15 @@ import "./globals.css";
 import { Providers } from "@/components/layout/providers";
 
 export const metadata: Metadata = {
-  title: "Ứng dụng AI phân tích, tính toán, thiết kế hệ thống điện mặt trời miễn phí",
-  description: "Ứng dụng AI miễn phí giúp bạn phân tích, tính toán, và thiết kế hệ thống điện mặt trời. Nhận gợi ý chi tiết về chi phí, vật tư, và hiệu quả kinh tế cho hệ thống hòa lưới, hybrid, và độc lập.",
+  title: "AI Thiết kế Điện mặt trời: Phân tích & Báo giá Miễn phí",
+  description: "Thiết kế hệ thống điện mặt trời tối ưu với công nghệ AI miễn phí. Phân tích nhu cầu, gợi ý thiết bị và báo giá chi tiết tức thì. Khám phá ngay!",
   keywords: [
-    'điện mặt trời', 
-    'năng lượng mặt trời', 
-    'tính toán điện mặt trời', 
-    'thiết kế hệ thống điện mặt trời', 
-    'AI cho điện mặt trời', 
-    'công cụ tính toán năng lượng mặt trời', 
+    'ứng dụng ai thiết kế điện mặt trời',
+    'thiết kế điện mặt trời miễn phí',
+    'AI cho điện mặt trời',
+    'công cụ tính toán năng lượng mặt trời',
+    'phân tích hệ thống điện mặt trời',
+    'báo giá điện mặt trời',
     'hệ thống điện mặt trời hòa lưới', 
     'hệ thống điện mặt trời hybrid', 
     'hệ thống điện mặt trời độc lập', 
