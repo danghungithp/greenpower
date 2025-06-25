@@ -37,7 +37,7 @@ export default function ProductsPage() {
     if (savedData) {
       const lines = savedData.split('\n').filter(line => line.trim() !== '');
       
-      const parsedProducts = lines.map(line => {
+      const parsedProducts = lines.map((line, index) => {
         let name = line.trim();
         let price: string | undefined;
         let url: string | undefined;
@@ -72,12 +72,18 @@ export default function ProductsPage() {
             }
         }
 
+        const dataAiHint = getAiHint(name);
+        // "solar panel" -> "solar,panel" to use as keywords for Unsplash
+        const keywords = dataAiHint.replace(/\s+/g, ','); 
+        // Add a random parameter based on index to get a stable unique image per product
+        const imageUrl = `https://source.unsplash.com/600x400/?${keywords}&random=${index}`;
+
         return {
           name: name || "Sản phẩm chưa đặt tên",
           price,
           url,
-          imageUrl: `https://placehold.co/600x400.png`,
-          dataAiHint: getAiHint(name),
+          imageUrl: imageUrl,
+          dataAiHint: dataAiHint,
         };
       }).filter(p => p.name && p.name !== "Sản phẩm không có tên");
 
