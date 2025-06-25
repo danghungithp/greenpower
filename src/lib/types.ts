@@ -1,7 +1,21 @@
 export type SuggestSolarSystemOutput = {
-  systemSuggestion: string;
+  systemType: string;
+  panel: {
+    type: string;
+    quantity: number;
+    totalPower: string;
+  };
+  inverter: {
+    type: string;
+  };
+  storage: {
+    needed: boolean;
+    capacity?: string;
+  };
+  estimatedCost: string;
   estimatedSavings: string;
   environmentalImpact: string;
+  notes: string;
 };
 
 export type BuildSolarSystemOutput = {

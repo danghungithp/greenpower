@@ -1,15 +1,17 @@
 'use server';
 
 import { suggestSolarSystem } from '@/ai/flows/suggest-solar-system';
-import type { SuggestSolarSystemInput } from '@/ai/flows/suggest-solar-system';
+import type {
+  SuggestSolarSystemInput,
+  SuggestSolarSystemOutput,
+} from '@/ai/flows/suggest-solar-system';
 import { buildSolarSystem } from '@/ai/flows/build-solar-system';
 import type { BuildSolarSystemInput } from '@/ai/flows/build-solar-system';
 import type { BuildSolarSystemOutput } from '@/lib/types';
 
-
 export async function suggestSolarSystemAction(
   input: SuggestSolarSystemInput
-): Promise<any> {
+): Promise<SuggestSolarSystemOutput | { error: string }> {
   'use server';
   try {
     const response = await suggestSolarSystem(input);

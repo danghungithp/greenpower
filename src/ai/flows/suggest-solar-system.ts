@@ -1,4 +1,4 @@
-// use server'
+'use server';
 
 /**
  * @fileOverview This file defines a Genkit flow for suggesting solar panel systems based on user inputs.
@@ -26,15 +26,23 @@ const SuggestSolarSystemInputSchema = z.object({
 export type SuggestSolarSystemInput = z.infer<typeof SuggestSolarSystemInputSchema>;
 
 const SuggestSolarSystemOutputSchema = z.object({
-  systemSuggestion: z
-    .string()
-    .describe('Một đề xuất chi tiết cho hệ thống pin mặt trời, bao gồm loại pin, số lượng pin, loại biến tần và chi phí ước tính.'),
-  estimatedSavings: z
-    .string()
-    .describe('Ước tính khoản tiết kiệm hàng tháng và hàng năm từ hệ thống pin mặt trời.'),
-  environmentalImpact: z
-    .string()
-    .describe('Ước tính lượng khí thải carbon giảm được khi sử dụng hệ thống pin mặt trời.'),
+  systemType: z.string().describe('Loại hệ thống được đề xuất (ví dụ: "Hòa lưới", "Hybrid", "Độc lập").'),
+  panel: z.object({
+      type: z.string().describe('Loại, thương hiệu và công suất của tấm pin mặt trời được đề xuất (ví dụ: "Canadian Solar 550W").'),
+      quantity: z.number().describe('Số lượng tấm pin cần thiết.'),
+      totalPower: z.string().describe('Tổng công suất của hệ thống pin (ví dụ: "5.5 kWp").')
+  }),
+  inverter: z.object({
+      type: z.string().describe('Loại, thương hiệu và công suất của inverter được đề xuất (ví dụ: "Deye Hybrid 5kW").'),
+  }),
+  storage: z.object({
+      needed: z.boolean().describe('Hệ thống có cần pin lưu trữ hay không. Chỉ cần thiết cho hệ thống Hybrid hoặc Độc lập.'),
+      capacity: z.string().optional().describe('Dung lượng pin lưu trữ được đề xuất nếu cần (ví dụ: "10 kWh").')
+  }),
+  estimatedCost: z.string().describe('Tổng chi phí ước tính cho toàn bộ hệ thống, định dạng tiền tệ Việt Nam (₫).'),
+  estimatedSavings: z.string().describe('Ước tính khoản tiết kiệm hàng tháng và hàng năm từ hệ thống pin mặt trời. Trình bày ngắn gọn, ví dụ: "Khoảng 2.000.000₫/tháng và 24.000.000₫/năm."'),
+  environmentalImpact: z.string().describe('Ước tính lượng khí thải CO2 giảm được hàng năm. Trình bày ngắn gọn, ví dụ: "Giảm khoảng 5 tấn CO2 mỗi năm."'),
+  notes: z.string().describe('Các ghi chú, giải thích hoặc lý do bổ sung cho đề xuất. Có thể sử dụng định dạng Markdown.'),
 });
 export type SuggestSolarSystemOutput = z.infer<typeof SuggestSolarSystemOutputSchema>;
 
@@ -46,19 +54,26 @@ const prompt = ai.definePrompt({
   name: 'suggestSolarSystemPrompt',
   input: {schema: SuggestSolarSystemInputSchema},
   output: {schema: SuggestSolarSystemOutputSchema},
-  prompt: `Bạn là một chuyên gia tư vấn năng lượng mặt trời. Dựa vào vị trí, nhu cầu năng lượng và diện tích mái nhà của chủ nhà, hãy đề xuất một hệ thống pin mặt trời phù hợp. Hãy định dạng câu trả lời của bạn bằng Markdown để dễ đọc, sử dụng danh sách (ví dụ: các gạch đầu dòng) và in đậm khi cần thiết. Khi bạn bao gồm các đường dẫn URL, hãy đảm bảo chúng là các liên kết có thể nhấp được bằng cách sử dụng cú pháp Markdown (ví dụ: [Tên sản phẩm](URL)). Cung cấp chi tiết về loại pin, số lượng pin, loại biến tần, chi phí ước tính, tiền tiết kiệm hàng tháng/hàng năm và tác động đến môi trường. Trả lời bằng tiếng Việt.
+  prompt: `Bạn là một chuyên gia tư vấn năng lượng mặt trời tại Việt Nam. Dựa vào vị trí, nhu cầu năng lượng và diện tích mái nhà của chủ nhà, hãy đề xuất một hệ thống pin mặt trời phù hợp bằng cách điền vào các trường trong cấu trúc đầu ra. Trả lời hoàn toàn bằng tiếng Việt.
+
+Phân tích các yêu cầu để xác định loại hệ thống phù hợp nhất (Hòa lưới, Hybrid, hoặc Độc lập).
+- Nếu nhu cầu năng lượng cao và không có yêu cầu lưu trữ, hãy đề xuất "Hòa lưới".
+- Nếu có yêu cầu sử dụng điện khi mất lưới, hãy đề xuất "Hybrid".
+- Nếu ở nơi không có lưới điện, hãy đề xuất "Độc lập".
+
+Tính toán số lượng tấm pin và công suất hệ thống cần thiết. Lựa chọn các thiết bị (tấm pin, inverter, pin lưu trữ) có thông số kỹ thuật và thương hiệu phổ biến tại thị trường Việt Nam.
 
 {{#if customData}}
-Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho đề xuất của bạn:
+Hãy ưu tiên sử dụng các thông tin, sản phẩm, hoặc đường dẫn sau đây làm nguồn tham khảo chính cho đề xuất của bạn. Nếu có thông tin về giá hoặc sản phẩm cụ thể, hãy dùng nó để tăng độ chính xác.
 ---
 {{{customData}}}
 ---
 {{/if}}
 
 Dưới đây là thông tin chi tiết của khách hàng:
-Vị trí: {{{location}}}
-Nhu cầu năng lượng: {{{energyRequirements}}} kWh/tháng
-Diện tích mái: {{{roofSize}}} m²`,
+- Vị trí: {{{location}}}
+- Nhu cầu năng lượng: {{{energyRequirements}}} kWh/tháng
+- Diện tích mái: {{{roofSize}}} m²`,
 });
 
 const suggestSolarSystemFlow = ai.defineFlow(

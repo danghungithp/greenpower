@@ -30,9 +30,9 @@ export default function Home() {
     const result = await suggestSolarSystemAction(submissionData);
     
     setIsLoading(false);
-    if (result.error) {
+    if ("error" in result) {
       setError(result.error);
-    } else if (result.systemSuggestion) {
+    } else if (result.systemType) {
       setSuggestion(result);
     } else {
       setError(
@@ -71,22 +71,23 @@ export default function Home() {
 
 function SolarSuggestionSkeleton() {
   return (
-    <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
-      <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
+    <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+       <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
         <Skeleton className="h-8 w-1/2" />
         <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-5/6" />
-        <Skeleton className="h-4 w-3/4" />
+         <Skeleton className="h-4 w-3/4" />
       </div>
-      <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
-        <Skeleton className="h-8 w-1/2" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-5/6" />
-      </div>
-      <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
-        <Skeleton className="h-8 w-1/2" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-5/6" />
+      <div className="space-y-6">
+        <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
+            <Skeleton className="h-8 w-1/2" />
+            <Skeleton className="h-4 w-5/6" />
+        </div>
+        <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
+            <Skeleton className="h-8 w-1/2" />
+            <Skeleton className="h-4 w-5/6" />
+        </div>
       </div>
     </div>
   );
