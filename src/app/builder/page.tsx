@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import * as XLSX from 'xlsx';
 import {
   Card,
@@ -35,24 +34,7 @@ import { buildSolarSystemAction } from '../actions';
 import type { BuildSolarSystemOutput } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
-
-const diagramMap = {
-  'grid-tie': {
-    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-hoa-luoi-1.jpg',
-    alt: 'Sơ đồ hệ thống hòa lưới',
-    hint: 'grid-tie solar diagram'
-  },
-  'hybrid': {
-    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-Hybrid-1.jpg',
-    alt: 'Sơ đồ hệ thống hybrid',
-    hint: 'hybrid solar diagram'
-  },
-  'off-grid': {
-    src: 'https://ec-tech.vn/wp-content/uploads/2022/10/So-do-he-thong-dien-mat-troi-doc-lap-co-may-phat-1.jpg',
-    alt: 'Sơ đồ hệ thống độc lập có máy phát',
-    hint: 'off-grid solar diagram generator'
-  },
-};
+import { SolarSystemDiagram } from '@/components/builder/solar-system-diagram';
 
 const LOCAL_STORAGE_KEY = 'customSolarDataSource';
 
@@ -218,16 +200,7 @@ export default function BuilderPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="w-full flex justify-center items-center overflow-hidden rounded-lg border bg-background p-4">
-                <Image
-                  src={diagramMap[systemType as keyof typeof diagramMap].src}
-                  alt={diagramMap[systemType as keyof typeof diagramMap].alt}
-                  width={800}
-                  height={450}
-                  data-ai-hint={diagramMap[systemType as keyof typeof diagramMap].hint}
-                  className="object-contain"
-                />
-              </div>
+              <SolarSystemDiagram systemType={systemType} />
             </CardContent>
           </Card>
 
@@ -341,7 +314,7 @@ function ResultsSkeleton() {
           <Skeleton className="h-4 w-2/3 mt-2" />
         </CardHeader>
         <CardContent>
-          <Skeleton className="h-[450px] w-full" />
+          <Skeleton className="h-48 w-full" />
         </CardContent>
       </Card>
       <Card>
