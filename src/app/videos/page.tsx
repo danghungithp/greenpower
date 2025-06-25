@@ -5,29 +5,29 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 
 const videos = [
   {
-    id: 'Jg_T5g3a1Jc',
-    title: 'Tự lắp đặt hệ thống điện mặt trời 5.5kWp cho gia đình',
-    description: 'Hướng dẫn chi tiết các bước để tự mình lắp đặt một hệ thống điện mặt trời hòa lưới cho gia đình.'
+    id: 'u6Y7YqX_Y-0',
+    title: 'Hướng dẫn TỰ LẮP ĐẶT ĐIỆN MẶT TRỜI áp mái chi tiết',
+    description: 'Video hướng dẫn chi tiết các bước tự lắp đặt một hệ thống điện mặt trời áp mái cho gia đình.'
   },
   {
-    id: 'k6oJ_nB_z-A',
-    title: 'Chi phí lắp điện mặt trời cho gia đình năm 2024 là bao nhiêu?',
-    description: 'Phân tích chi tiết về chi phí đầu tư, các loại hệ thống và những điều cần lưu ý khi lắp đặt điện mặt trời.'
+    id: 'Cq_T-c_Qk-s',
+    title: 'Đầu tư điện mặt trời 2024: Nên hay không? | VTV24',
+    description: 'Phân tích xu hướng, chi phí và hiệu quả của việc đầu tư điện mặt trời trong năm 2024 từ kênh VTV24.'
   },
   {
-    id: '8g-n2p7Q_oA',
-    title: 'Cách tính toán đầu tư điện mặt trời hiệu quả cho hộ gia đình',
-    description: 'Hướng dẫn cách tính toán công suất hệ thống cần lắp, chi phí và thời gian hoàn vốn một cách chi tiết.'
+    id: 'Vz-yM4o0ZcM',
+    title: 'Cách tính toán công suất hệ thống điện mặt trời',
+    description: 'Hướng dẫn chi tiết cách tính toán công suất hệ thống cần lắp, chi phí và thời gian hoàn vốn.'
   },
   {
-    id: 'r_s9d-tH4QY',
-    title: 'Bí quyết sử dụng điện mặt trời hiệu quả, tiết kiệm tối đa',
+    id: '5z_2yO6n-m8',
+    title: 'Cách sử dụng điện mặt trời hiệu quả, tiết kiệm điện',
     description: 'Các mẹo và kinh nghiệm thực tế để tối ưu hóa việc sử dụng năng lượng từ hệ thống điện mặt trời của bạn.'
   },
-    {
-    id: 'O-qY_bJg-Yg',
-    title: 'Hướng Dẫn Tự Lắp Đặt Bộ Điện Năng Lượng Mặt Trời 1000W',
-    description: 'Một video hướng dẫn thực tế về việc lắp đặt một hệ thống điện mặt trời độc lập quy mô nhỏ.'
+  {
+    id: 'Jg_T5g3a1Jc',
+    title: 'Tự lắp đặt hệ thống điện mặt trời 5.5kWp cho gia đình',
+    description: 'Một video hướng dẫn thực tế về việc lắp đặt một hệ thống điện mặt trời hòa lưới cho gia đình.'
   },
    {
     id: 'uRlaDe_HpSo',
