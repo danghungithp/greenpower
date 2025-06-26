@@ -93,74 +93,78 @@ export default function ProductsPage() {
   }, []);
 
   return (
-    <div className="space-y-8">
-      <div>
+    <>
+      <head>
+        <title>Sản phẩm điện mặt trời | AI Solar Designer</title>
+        <meta name="description" content="Danh mục sản phẩm điện mặt trời: tấm pin, inverter, pin lưu trữ, phụ kiện... Tìm kiếm, so sánh và nhận tư vấn AI miễn phí." />
+      </head>
+      <div className="space-y-8">
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
-          Danh mục Sản phẩm
+          Danh mục sản phẩm điện mặt trời
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
           Các sản phẩm và vật tư được lấy từ nguồn dữ liệu tùy chỉnh của bạn.
         </p>
-      </div>
 
-      {isLoading && (
-        <div className="flex h-64 items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
-      )}
+        {isLoading && (
+          <div className="flex h-64 items-center justify-center">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        )}
 
-      {!isLoading && products.length === 0 && (
-         <Alert>
-            <Lightbulb className="h-4 w-4" />
-            <AlertTitle>Chưa có sản phẩm nào</AlertTitle>
-            <AlertDescription>
-                <p>Nguồn dữ liệu sản phẩm của bạn đang trống. Vui lòng đi đến trang Quản trị để thêm các URL hoặc thông tin sản phẩm.</p>
-                <Button asChild className="mt-4">
-                    <Link href="/admin">Đi đến trang Quản trị</Link>
-                </Button>
-            </AlertDescription>
-        </Alert>
-      )}
-
-      {!isLoading && products.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map((product, index) => (
-            <Card key={index} className="flex flex-col overflow-hidden">
-                <div className="relative aspect-[3/2] w-full bg-muted">
-                    <Image 
-                        src={product.imageUrl} 
-                        alt={product.name} 
-                        fill
-                        className="object-cover"
-                        data-ai-hint={product.dataAiHint}
-                    />
-                </div>
-              <CardHeader>
-                <CardTitle className="text-base h-12 line-clamp-2">{product.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                {product.price ? (
-                    <p className="text-lg font-semibold text-primary">{product.price}</p>
-                ) : (
-                    <p className="text-sm text-muted-foreground">Chưa có giá</p>
-                )}
-              </CardContent>
-              <CardFooter>
-                {product.url ? (
-                  <Button asChild className="w-full">
-                    <Link href={product.url} target="_blank" rel="noopener noreferrer">
-                      Xem chi tiết
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </Link>
+        {!isLoading && products.length === 0 && (
+           <Alert>
+              <Lightbulb className="h-4 w-4" />
+              <AlertTitle>Chưa có sản phẩm nào</AlertTitle>
+              <AlertDescription>
+                  <p>Nguồn dữ liệu sản phẩm của bạn đang trống. Vui lòng đi đến trang Quản trị để thêm các URL hoặc thông tin sản phẩm.</p>
+                  <Button asChild className="mt-4">
+                      <Link href="/admin">Đi đến trang Quản trị</Link>
                   </Button>
-                ) : (
-                    <Button disabled className="w-full">Không có liên kết</Button>
-                )}
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      )}
-    </div>
+              </AlertDescription>
+          </Alert>
+        )}
+
+        {!isLoading && products.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {products.map((product, index) => (
+              <Card key={index} className="flex flex-col overflow-hidden">
+                  <div className="relative aspect-[3/2] w-full bg-muted">
+                      <Image 
+                          src={product.imageUrl} 
+                          alt={product.name} 
+                          fill
+                          className="object-cover"
+                          data-ai-hint={product.dataAiHint}
+                      />
+                  </div>
+                <CardHeader>
+                  <CardTitle className="text-base h-12 line-clamp-2">{product.name}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  {product.price ? (
+                      <p className="text-lg font-semibold text-primary">{product.price}</p>
+                  ) : (
+                      <p className="text-sm text-muted-foreground">Chưa có giá</p>
+                  )}
+                </CardContent>
+                <CardFooter>
+                  {product.url ? (
+                    <Button asChild className="w-full">
+                      <Link href={product.url} target="_blank" rel="noopener noreferrer">
+                        Xem chi tiết
+                        <ExternalLink className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  ) : (
+                      <Button disabled className="w-full">Không có liên kết</Button>
+                  )}
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

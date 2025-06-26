@@ -42,30 +42,37 @@ export default function Home() {
   };
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
-          Gợi ý hệ thống năng lượng mặt trời bằng AI
-        </h1>
-        <p className="mt-2 text-lg text-muted-foreground">
-          Điền các thông tin chi tiết bên dưới để nhận được đề xuất hệ thống pin mặt trời được cá nhân hóa từ AI của chúng tôi.
-        </p>
-      </div>
-      <SolarSuggestionForm onSubmit={handleSubmit} isLoading={isLoading} />
-
-      {error && (
-        <div
-          className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
-          role="alert"
-        >
-          <p className="font-semibold">Đã xảy ra lỗi</p>
-          <p>{error}</p>
+    <>
+      {/* SEO: Meta description cho trang chủ */}
+      <head>
+        <title>AI Thiết kế Điện mặt trời | Gợi ý hệ thống cá nhân hóa</title>
+        <meta name="description" content="Nhận gợi ý hệ thống điện mặt trời cá nhân hóa bằng AI. Phân tích nhu cầu, báo giá, sơ đồ và thiết bị phù hợp nhất cho bạn." />
+      </head>
+      <div className="space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
+            Gợi ý hệ thống điện mặt trời cá nhân hóa bằng AI
+          </h1>
+          <p className="mt-2 text-lg text-muted-foreground">
+            Điền các thông tin chi tiết bên dưới để nhận được đề xuất hệ thống pin mặt trời phù hợp nhất từ AI của chúng tôi.
+          </p>
         </div>
-      )}
+        <SolarSuggestionForm onSubmit={handleSubmit} isLoading={isLoading} />
 
-      {isLoading && <SolarSuggestionSkeleton />}
-      {suggestion && <SolarSuggestionResults suggestion={suggestion} />}
-    </div>
+        {error && (
+          <div
+            className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
+            role="alert"
+          >
+            <p className="font-semibold">Đã xảy ra lỗi</p>
+            <p>{error}</p>
+          </div>
+        )}
+
+        {isLoading && <SolarSuggestionSkeleton />}
+        {suggestion && <SolarSuggestionResults suggestion={suggestion} />}
+      </div>
+    </>
   );
 }
 

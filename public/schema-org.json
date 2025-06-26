@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AI Thiết kế Điện mặt trời",
+  "url": "https://ai-solar-designer.com/",
+  "logo": "https://ai-solar-designer.com/logo.png",
+  "description": "Công cụ AI thiết kế hệ thống điện mặt trời miễn phí. Phân tích nhu cầu, nhận gợi ý thiết bị, sơ đồ đấu nối và báo giá chi tiết tức thì.",
+  "sameAs": [
+    "https://www.facebook.com/ai.solar.designer"
+  ]
+}

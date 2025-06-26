@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useMemo, useEffect } from 'react';
@@ -294,9 +293,14 @@ export default function CalculatorPage() {
     const mappedSystemType = mode === 'grid' ? 'grid-tie' : (mode === 'offgrid' ? 'off-grid' : 'hybrid');
 
     return (
+      <>
+        <head>
+          <title>Tính toán hiệu quả điện mặt trời | AI Solar Designer</title>
+          <meta name="description" content="Công cụ tính toán chi phí, hoàn vốn, tiết kiệm và hiệu quả đầu tư hệ thống điện mặt trời. Phân tích chi tiết, biểu đồ trực quan." />
+        </head>
         <div className="space-y-8">
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">
-                Công cụ tính toán & Xây dựng hệ thống
+                Tính toán hiệu quả đầu tư điện mặt trời
             </h1>
             <Alert>
                 <Info className="h-4 w-4" />
@@ -598,5 +602,6 @@ export default function CalculatorPage() {
                 </div>
             )}
         </div>
+      </>
     );
 }
